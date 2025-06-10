@@ -1,0 +1,18 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: app
+spec:
+  url: https://github.com/Notliam99/Notliam99/tree/v4/kube
+  ref:
+    branch: v4
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: app
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: app
+  path: ./kube
