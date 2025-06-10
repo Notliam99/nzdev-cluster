@@ -43,5 +43,5 @@ spec:
     app: node
   ports:
   - name: http
-    targetPort: 8080
+    targetPort: 8081
     port: 80
