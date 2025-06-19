@@ -32,7 +32,7 @@ spec:
         protocol: TCP
       # External [HTTP(s)] Services
       websecure:
-        port: 8000
+        port: 8443
         expose:
           default: true
         exposedPort: 443
