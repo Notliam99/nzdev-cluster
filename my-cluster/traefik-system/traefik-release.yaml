@@ -12,9 +12,14 @@ spec:
         name: traefik
       version: 36.1.0
   values:
+    ingressRoute:
+      dashboard:
+        enabled: true
+
     globalArguments:
       - "--global.sendanonymoususage=false"
       - "--global.checknewversion=false"
+
     ports:
       # Internal Traefik Services
       traefik:
