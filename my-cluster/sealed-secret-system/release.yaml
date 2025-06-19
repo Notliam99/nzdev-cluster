@@ -16,7 +16,6 @@ spec:
         kind: HelmRepository
         name: sealed-secrets
       version: 2.5.15
-  interval: 1m0s
   values:
     ingress:
       enabled: true
@@ -25,3 +24,5 @@ spec:
       annotations: {
         traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
       }
+
+  interval: 1m0s
