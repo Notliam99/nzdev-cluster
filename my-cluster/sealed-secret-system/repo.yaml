@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: sealed-secret-repo
+  name: sealed-secrets
   namespace: sealed-secret-system
 spec:
   interval: 1m0s

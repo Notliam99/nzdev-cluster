@@ -6,7 +6,7 @@ metadata:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: sealed-secret-release
+  name: sealed-secret
   namespace: sealed-secret-system
 spec:
   chart:
