@@ -35,7 +35,7 @@ spec:
         port: 8000
         expose:
           default: true
-        exposedPort: 80
+        exposedPort: 443
         protocol: TCP
 
     service:
