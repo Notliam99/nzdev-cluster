@@ -4,5 +4,5 @@ metadata:
   name: sealed-secrets
   namespace: sealed-secret-system
 spec:
-  interval: 1m0s
-  url: https://bitnami-labs.github.io/sealed-secrets
+  interval: 5m0s
+  url: oci://registry-1.docker.io/bitnamicharts/sealed-secrets

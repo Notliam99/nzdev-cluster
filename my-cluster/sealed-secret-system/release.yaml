@@ -15,7 +15,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: sealed-secrets
-      version: 2.5.14
+      version: 2.5.15
   values:
     ingress:
       enabled: true
