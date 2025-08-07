@@ -36,7 +36,7 @@ metadata:
 spec:
   secretName: nzdev-org-tls
   secretTemplate:
-    anotations:
+    annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
       reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: ""
   issuerRef:
