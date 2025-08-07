@@ -34,8 +34,6 @@ metadata:
   name: nzdev-org
   namespace: cert-manager
 spec:
-  generatorOptions:
-    disableNameSuffixHash: true
   secretName: nzdev-org-tls
   issuerRef:
     name: cert-issuer
