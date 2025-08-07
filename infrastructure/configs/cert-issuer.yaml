@@ -13,6 +13,7 @@ metadata:
   name: cert-issuer
 spec:
   acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
     email: cert.issuer@nzdev.org
     privateKeySecretRef:
       name: letsencrypt-cert
