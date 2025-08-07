@@ -32,15 +32,11 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: nzdev-org
-  namespace: notes
+  namespace: cert-manager
 spec:
+  generatorOptions:
+    disableNameSuffixHash: true
   secretName: nzdev-org-tls
-  # secretTemplate:
-  #   annotations:
-  #     reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
-  #     reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: "notes"
-  #     reflector.v1.k8s.emberstack.com/reflection-auto-enabled: "true"
-  #     rreflector.v1.k8s.emberstack.com/reflection-auto-enabled: "notes"
   issuerRef:
     name: cert-issuer
     kind: ClusterIssuer
@@ -48,3 +44,14 @@ spec:
   dnsNames:
   - "nzdev.org"
   - "*.nzdev.org"
+---
+apiVersion: traefik.io/v1alpha1
+kind: TLSStore
+metadata:
+  name: default-cert
+  namespace: cert-manager
+
+spec:
+  default-certificate:
+    secretName: nzdev-org-tls
+
