@@ -14,7 +14,7 @@ spec:
       chart: traefik
       sourceRef:
         kind: HelmRepository
-        name: traefik
+        name: traefik-repo
       version: 36.1.0
   values:
     ingressRoute:
