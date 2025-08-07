@@ -4,6 +4,8 @@ metadata:
   name: traefik
   namespace: traefik-system
 spec:
+  install:
+    createNamespace: true
   chart:
     spec:
       chart: traefik
