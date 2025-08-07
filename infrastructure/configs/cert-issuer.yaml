@@ -27,3 +27,18 @@ spec:
         selector:
           dnsZones:
             - "nzdev.org"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nzdev-org
+  namespace: default
+spec:
+  secretName: nzdev-org-tls
+  issuerRef:
+    name: cert-issuer
+    kind: ClusterIssuer
+  commonName: "*.nzdev.org"
+  dnsNames:
+  - "nzdev.org"
+  - "*.nzdev.org"

@@ -6,9 +6,13 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
 spec:
+  tls:
+    - hosts:
+        - nzdev.org
+      secretName: nzdev-org-tls
   rules:
   - host: nzdev.org
-    http:
+    https:
       paths:
       - path: /
         pathType: Prefix
