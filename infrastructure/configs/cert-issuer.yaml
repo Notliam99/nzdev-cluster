@@ -8,7 +8,7 @@ stringData:
   cloudflare-token: jB35zILBObfOpbGBAb2tP2VGMc3jawLSUq-wXX5T
 ---
 apiVersion: cert-manager.io/v1
-kind: ClusterIssure
+kind: ClusterIssuer
 metadata:
   name: cert-issuer
 spec:
