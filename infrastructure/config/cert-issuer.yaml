@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-token
+  namespace: cert-manager
+type: Opaque
+stringData:
+  cloudflare-token: jB35zILBObfOpbGBAb2tP2VGMc3jawLSUq-wXX5T
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssure
+metadata:
+  name: cert-issuer
+spec:
+  acme:
+    email: cert.issuer@nzdev.org
+    privateKeySecretRef:
+      name: letsencrypt-cert
+    solvers:
+      - dns01:
+          cloudflare:
+            email: l.tietjens@hotmail.com
+            apiTokenSecretRef:
+              name: cloudflare-token
+              key: cloudflare-token
+        selector:
+          dnsZones:
+            - "nzdev.org"
