@@ -5,11 +5,12 @@ metadata:
   name: notes-ingress
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: cert-issuer
 spec:
   tls:
     - hosts:
         - nzdev.org
-      secretName: nzdev-org-tls
+      secretName: root-nzdev-org-tls
   rules:
   - host: nzdev.org
     http:
