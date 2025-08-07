@@ -50,6 +50,6 @@ metadata:
   namespace: cert-manager
 
 spec:
-  default-certificate:
+  defaultCertificate:
     secretName: nzdev-org-tls
 
