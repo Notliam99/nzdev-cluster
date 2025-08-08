@@ -5,3 +5,4 @@ resources:
   - cert-manager.yaml
   - reflector.yaml
   - traefik.yaml
+  - nfs-subdir-external-provisioner.yaml
