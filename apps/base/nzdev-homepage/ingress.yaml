@@ -21,4 +21,4 @@ spec:
   tls:
   - hosts:
     - nzdev.org
-  - secretName: nzdev-org-homepage-temp
+    secretName: nzdev-org-homepage-temp
