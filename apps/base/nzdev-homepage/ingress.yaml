@@ -7,10 +7,6 @@ metadata:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     cert-manager.io/cluster-issuer: cert-issuer
 spec:
-  tls:
-    - hosts:
-        - nzdev.org
-      secretName: root-nzdev-org-tls
   rules:
   - host: nzdev.org
     http:
@@ -22,3 +18,7 @@ spec:
             name: notes-service
             port:
               number: 80
+  tls:
+  - hosts:
+    - nzdev.org
+    secretName: nzdev-org-tls
