@@ -21,7 +21,9 @@ spec:
       dashboard:
         enabled: true
         matchRule: Host(`dash.nzdev.org`)
-        entryPoints: ["web"]
+        entryPoints: ["websecure"]
+        tls:
+          - main: dash.nzdev.org
 
     globalArguments:
       - "--global.sendanonymoususage=false"
