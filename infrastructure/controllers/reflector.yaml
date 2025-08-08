@@ -13,7 +13,7 @@ spec:
   interval: 24h
   url: https://emberstack.github.io/helm-charts
 ---
-apiVersion: source.toolkit.fluxcd.io/v2
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: reflector
