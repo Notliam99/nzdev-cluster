@@ -53,7 +53,7 @@ apiVersion: traefik.io/v1alpha1
 kind: TLSStore
 metadata:
   name: default-cert
-  namespace: cert-manager
+  namespace: traefik-system
 
 spec:
   defaultCertificate:
