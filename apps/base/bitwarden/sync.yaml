@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bitwarden
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: github-bitwarden-token
+  namespace: bitwarden
+spec:
+  encryptedData:
+    bearerToken: AgBS34B/ChELy9fbTpWuNF0KNnu9Y51Wi4wK4N2t8LONo6XTEvw9vLYOlXE91FLRL0CSV8iHfSgz73g8mOkTX0LgMLYZjvi7YV8hHCOM8+VJ9VLIvrWK6MgXgu55uAhKCWlsFRtsTebIBP4acYF6mPex3/tp03Kq+rzZm70b+p3tF4+Ckt2oCuNvaEVhnYpqPIwPT9rt2N27S5BIf5bKffPEtGIFcTGLbWH8Y6JA77hes0dyuFvS1/bpAvAvE2ZjTQ7b+2IzQS62RRlIEaUkkQYAIXNk5OTtsxTYll76BU3Tv0ERNlGGAqxrfi3y1Pv2Uaey0iQsFigQAHYnEWQ9Vaj1A2obiVU6iLQGAieK8UnDkTKmuYgu908s5PX6bnlw8Qk41MRos9ZtKF7XeHIj6wwgG5ixMMpiYGHUC9mi3P9BPFuKUjjegWj+WjLFeIhJJJVpXoL6WNvFy2x+4Z5i9E+sicao3hewT7JCJ2nli5WOGabk9nKiy6o+V99i4viapoL3fVEkEpLKnekc0/XETZoDW9jltuFPb1oLlO4r/BPTDbn8c+dEJOUYduRA66fUGl8TiXkiW3+2W9P9NRA5ExmxWQJcQZm7cX9HnOGJ9Ovq4Qxfv5wDFNyAYdJrgkCmDSbIzdC6AvCqmVHvXnQUrbsLiWNWr6xeOnK/NpSTv50/fpcLPjyOuja/Cj0+3uMjPyprCWAGq7njAZ450I50AFAmtb5PRFlKkTFavxaaEwy9CJnwUPdI90qrjOippNbYuoqfRI/X0qdoqM1uFBw891j90S2RbyxH1/TKppAp8T21G4OfbR+UiPbb1ZBMCwc=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: github-bitwarden-token
+      namespace: bitwarden
+    type: Opaque
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: bitwarden
+spec:
+  url: https://github.com/Notliam99/bitwarden-manifests
+  secretRef:
+    name: github-bitwarden-token
+  ref:
+    branch: main
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: bitwarden
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: bitwarden
+  path: .
