@@ -1,0 +1,40 @@
+apiVersion: heml.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: passbolt
+  namespace: passbolt
+spec:
+  interval: 12h
+  targetNamespace: passbolt
+  driftDetection:
+    mode: enabled
+  values:
+    mariadb:
+      primary.presistence.storageClass: "nfsclient"
+      secondary.presistence.storageClass: "nfsclient"
+    ingress:
+      enabled: true
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      hosts:
+        - host: passbolt.nzdev.org
+          paths:
+          - path: /
+            port: https
+            pathType: ImplementationSpecific
+      tls: {}
+    livenessProbe.httpGet.httpHeaders:
+      - name: Host
+        value: passbolt.nzdev.org
+    readinessProbe.httpGet.httpHeaders:
+      - name: Host
+        value: passbolt.nzdev.org
+
+  chart:
+    spec:
+      chart: passbolt
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: passbolt
+      version: '>=1.3.3'
