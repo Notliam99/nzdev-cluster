@@ -26,6 +26,7 @@ metadata:
   namespace: bitwarden
 spec:
   url: https://github.com/Notliam99/bitwarden-manifests
+  interval: 2h
   secretRef:
     name: github-bitwarden-token
   ref:
@@ -37,6 +38,8 @@ metadata:
   name: bitwarden
   namespace: bitwarden
 spec:
+  interval: 1h
+  prune: true
   sourceRef:
     kind: GitRepository
     name: bitwarden
