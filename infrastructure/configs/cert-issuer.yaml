@@ -12,7 +12,7 @@ spec:
     solvers:
       - dns01:
           cloudflare:
-            email: cloudflare@nzdev.org
+            # email: cloudflare@nzdev.org
             apiTokenSecretRef:
               name: cloudflare-token
               key: cloudflare-token
