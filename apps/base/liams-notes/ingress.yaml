@@ -5,9 +5,19 @@ metadata:
   name: notes-ingress
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    cert-manager.io/cluster-issuer: cert-issuer
 spec:
   rules:
+  - host: notes.nzdev.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: notes-service
+            port:
+              number: 80
+# Tempory till setup the home page again...
   - host: nzdev.org
     http:
       paths:
@@ -18,7 +28,3 @@ spec:
             name: notes-service
             port:
               number: 80
-  tls:
-  - hosts:
-    - nzdev.org
-    secretName: nzdev-org-homepage-temp
