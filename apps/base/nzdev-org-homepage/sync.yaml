@@ -3,6 +3,23 @@ kind: Namespace
 metadata:
   name: nzdev-org-homepage
 ---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: homepage-github-token
+  namespace: nzdev-org-homepage
+spec:
+  encryptedData:
+    password: AgBbkIkApJxUwU0Gw8nh1iHKwfOPuVWvb8hFOtHD6RgQRnk/o1woZYmF1ChuhFs+x31CWM0CO3OLABXs7f7FZwH8tcoc2qlyOPAV5bubSFWei6cFShKmUC5eviSBI3AaS8fG7EIn676uQ+XI1l12VcXgQVHAZVPt/dWZED7UDOM3kzM9KDZNy61j4wHuDNz2N4eQeqkBwAAZ6ETAPlAQ7LJhuO9vZpyenhHfPYG9hQN9Tbls7nTgR8DxW2ZJjLzTbmPwHymWwJrMfyk5wmkLAYnjYuklG6+YDE5MmICkq/SkEnfFCI/31JKvBRKXMScv6/DMGofNSE/R17GdfCAbiinyAKUbUlM0ahLsR9g1Mp88wwCO70NCdgPLziJK6a1vomheWO/pSGAi+mUVzLjeZYN51z/h1McVcWAKMjaBf5wJ36qHv+wEgG57OPjqr+bsPFzsmyPDv+U2rUzYBxc2jtLWjXEvBj8y2+IKDgUsewZQnVe17OlLlyd5MK2jMEZOQBfaa+ZSUU8PnKlVOxN06BnrQsf7O3QwvV7nURTiBCCQEvI//2x6clrKcrBP3GLIwpMS2YlMz+PZyipkaEzaSunqOwTRlDHcrLP5ZJaLOif7WT7xPmt7Kl6WgUkG5F7ZmDzsi7cm1GSqNkL3VIp8IWzVQ/THWST2HCkWDUi10IO8egcdZLOto43VFl35mRr25Sy7QpIQBhxHz4nOIQDi1ozYZbo9xc7/hSpJtnq8otNo4p+eHohY97FvCKLk4k8L3hSmjKOkgcdGPicc2NS7fLjQjcpdc2jM15/9Nmz71oXCFsiEUVmoaNHX53UDRx0P
+    username: AgBJZ70AoOprfFlUVG0B9MAPMmZYlDjCxqt6mbQQQyjQnKDO3ejHwF3yYP0Tlfl51pl7I3tbHZ25eOggT9l2D5aek6Rm+ul4b2E2eplK2dk9p1SWAk4j3c8vGyyKiSkGlEB2SVgOHEPIxqnV2I5lfvPQEGqbnyW03B9pvKODuziiZJ8VphEbm+B+pviZ9awvmiYqXOGGIJI9pYRsONIlFYvWv5MiF6232Jw7z2+2yhT03bzfiZl0fC8PhjqfIXPGTIfBSjMRls06BIW7dM7N+qqexR36FRyXXjZLVxLWmDyVjBaQBGHcCsRu7AhEQkcDI6/6uLZDFW3lztRO+VvRWFo8y4mGWpq1XRSZtRlHqBPcZQiemCLcClsZ7vvooRTCmk6y/TkujdkQiV0/3SLfbys2i2ePNy+auW8JX2U3BEztsmS3qAeUvQO4p6Ueh2gLXZs5QKvpk0EiC99BVlSn+QKElTxGWAAUUo2p4uyJ1ub1kFYjL0tonGtme+Eb3DIqm+RAHn6kTW39zSaTUwgt/m2Ldf44R/I+f0fdJSsywE25OIJk+8kmWDBe8R09BJJKvPvHrYTAZ+NLVoVNhCJi9vQLdMhQMTORFEVVYuFeV82ToEpdjzvv/v0KmnuQVhYS9yQij1xnF+SaCkoKNB+ofzM/94jsAikzoA+Stnm/3KPO4oeVHSKg2/tvYHmFYgf2DrRm0P4kCEmibcoS
+  template:
+    metadata:
+      creationTimestamp: null
+      name: homepage-github-token
+      namespace: nzdev-org-homepage
+    type: Opaque
+---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
@@ -11,6 +28,8 @@ metadata:
 spec:
   url: https://github.com/Notliam99/nzdev-org.git
   interval: 12h
+  secretRef:
+    name: homepage-github-token
   ref:
     branch: main
 ---
