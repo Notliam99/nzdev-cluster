@@ -10,7 +10,7 @@ metadata:
   namespace: nzdev-org-homepage
 spec:
   url: https://github.com/Notliam99/nzdev-org.git
-  interval: 15m
+  interval: 12h
   ref:
     branch: main
 ---
@@ -20,7 +20,7 @@ metadata:
   name: nzdev-org-homepage
   namespace: nzdev-org-homepage
 spec:
-  interval: 15m
+  interval: 12h
   prune: true
   sourceRef:
     kind: GitRepository
