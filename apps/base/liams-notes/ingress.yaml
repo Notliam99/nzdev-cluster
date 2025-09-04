@@ -17,14 +17,3 @@ spec:
             name: notes-service
             port:
               number: 80
-# Tempory till setup the home page again...
-  - host: nzdev.org
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: notes-service
-            port:
-              number: 80
