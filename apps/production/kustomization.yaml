@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - ../base/liams-notes
   - ../base/bitwarden/sync.yaml
+  - ../base/nzdev-org-homepage/sync.yaml
