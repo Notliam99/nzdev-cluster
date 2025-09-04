@@ -26,7 +26,7 @@ metadata:
   name: nzdev-org-homepage
   namespace: nzdev-org-homepage
 spec:
-  url: ssh://git@github.com:Notliam99/nzdev-org.git
+  url: ssh://git@github.com/Notliam99/nzdev-org.git
   interval: 12h
   secretRef:
     name: homepage-github-token
