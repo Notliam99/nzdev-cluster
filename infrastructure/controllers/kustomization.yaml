@@ -6,3 +6,4 @@ resources:
   - reflector.yaml
   - traefik.yaml
   - nfs-subdir-external-provisioner.yaml
+  - cloudnative-pg.yaml
