@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: fish-site
+  name: fishy-site
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -24,7 +24,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
   name: fish-site
-  namespace: fish-site
+  namespace: fishy-site
 spec:
   url: ssh://git@github.com:HowManyFish/FishySite.git
   interval: 5m
