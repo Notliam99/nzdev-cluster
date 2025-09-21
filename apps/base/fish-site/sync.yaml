@@ -26,7 +26,7 @@ metadata:
   name: fish-site
   namespace: fishy-site
 spec:
-  url: ssh://git@github.com:HowManyFish/FishySite.git
+  url: ssh://git@github.com/HowManyFish/FishySite.git
   interval: 5m
   secretRef:
     name: fishy-gh-token
