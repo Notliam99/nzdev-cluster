@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: nzdev-org-homepage
+  name: fish-site
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -23,23 +23,23 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: nzdev-org-homepage
-  namespace: nzdev-org-homepage
+  name: fish-site
+  namespace: fish-site
 spec:
-  url: ssh://git@github.com/Notliam99/nzdev-org.git
+  url: ssh://git@github.com:HowManyFish/FishySite.git
   interval: 5m
   secretRef:
-    name: homepage-github-token
+    name: fishy-gh-token
   ref:
     branch: main
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: nzdev-org-homepage
-  namespace: nzdev-org-homepage
+  name: fishy-site
+  namespace: fishy-site
 spec:
-  interval: 12h
+  interval: 10m
   prune: true
   sourceRef:
     kind: GitRepository
