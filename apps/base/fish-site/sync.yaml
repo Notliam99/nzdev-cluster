@@ -43,5 +43,5 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: nzdev-org-homepage
+    name: fishy-site
   path: ./deploy
