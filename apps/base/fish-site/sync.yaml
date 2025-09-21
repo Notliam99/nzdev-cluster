@@ -23,7 +23,7 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: fish-site
+  name: fishy-site
   namespace: fishy-site
 spec:
   url: ssh://git@github.com/HowManyFish/FishySite.git
