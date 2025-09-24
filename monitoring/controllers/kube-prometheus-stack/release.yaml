@@ -46,4 +46,6 @@ spec:
         path: /
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
-
+      env:
+        - name: "ALLOW_EMBEDDING"
+          Value: true
