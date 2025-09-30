@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - oci-repo.yaml
   - namespace.yaml
+  - database-cluster.yaml
