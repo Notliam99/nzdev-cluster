@@ -48,9 +48,6 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
       env:
         GF_SECURITY_ALLOW_EMBEDDING: true
-
-      grafana.ini:
-        server:
-          domain: graf.nzdev.org
-          http_port: 443
-          protocol: https
+        GF_SERVER_DOMAIN: graf.nzdev.org
+        GF_SERVER_HTTP_PORT: 443
+        GF_SERVER_PROTOCOL: https
