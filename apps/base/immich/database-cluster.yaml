@@ -4,6 +4,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: immich
+  namespace: immich
 spec:
   imageName: ghcr.io/tensorchord/cloudnative-vectorchord:17.5-0.3.0
   instances: 3
