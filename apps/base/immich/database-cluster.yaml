@@ -13,8 +13,6 @@ spec:
     size: 20Gi
     storageClass: nfsclient
   enableSuperuserAccess: true
-  superuserSecret:
-    name: immich-db-secret
   postgresql:
     parameters:
       max_connections: "300"
