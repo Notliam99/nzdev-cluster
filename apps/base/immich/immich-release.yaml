@@ -115,7 +115,7 @@ spec:
           main:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v2.0.0-rocm@sha256:309e0264372127bacf481d4210f34af7cc17a47812c66b3a02b2572014a8d3f8
+              tag: v2.0.0-rocm
             envFrom:
               - configMapRef:
                   name: immich-configmap
