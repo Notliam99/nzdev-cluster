@@ -94,12 +94,12 @@ spec:
               - name: DB_USERNAME
                 valueFrom:
                   secretKeyRef:
-                    name: immich-app
+                    name: immich-superuser
                     key: username
               - name: DB_PASSWORD
                 valueFrom:
                   secretKeyRef:
-                    name: immich-app
+                    name: immich-superuser
                     key: password
       machine-learning:
         strategy: RollingUpdate
