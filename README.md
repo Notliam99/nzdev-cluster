@@ -1,6 +1,9 @@
 # NZ Dev FluxCD Infra
 
-Infra as code for the kubernetes cluster thats behind all curent [nzdev.org](http://nzdev.org) sites.
+Infra as code for the kubernetes cluster thats behind all curent [nzdev.org](http://nzdev.org) sites. **Please** take into consideration im starting this project while still in high school and not using any templates.
+
+### Asperations
+Use other exciting technowlages like tallos os and deploy atleast another two web apps or tools by the end of 2025...
 
 ### Apps Deployed
 - [`Homepage`](https://nzdev.org) Homepage for `nzdev.org`
