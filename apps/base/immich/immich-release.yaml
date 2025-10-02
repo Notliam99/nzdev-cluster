@@ -174,7 +174,7 @@ spec:
               - path: /
                 service:
                   name: server
-                  port: 3001
+                  port: 2283
 
     persistence:
       # DONE: change these parameters to fit...
