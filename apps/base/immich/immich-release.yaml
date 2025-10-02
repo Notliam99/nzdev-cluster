@@ -85,6 +85,8 @@ spec:
                   name: immich-configmap
             env:
               # NOTE: fill in env's
+              - name: DB_VECTOR_EXTENSION
+                value: "vectorchord"
               - name: DB_DATABASE_NAME
                 value: app
               - name: DB_HOSTNAME
