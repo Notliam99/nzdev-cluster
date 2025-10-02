@@ -33,47 +33,47 @@ spec:
             runAsNonRoot: true
             fsGroup: 2000
             fsGroupChangePolicy: OnRootMismatch
-        initContainers:
-          init-db:
-            image:
-              repository: ghcr.io/home-operations/postgres-init
-              tag: 17.6@sha256:86a1992d46273c58fd4ad95b626081dfaabfe16bd56944675169e406d1a660dd
-              pullPolicy: IfNotPresent
-            env:
-              # NOTE: fill in env's
-
-              - name: "INIT_POSTGRES_DBNAME"
-                value: "app"
-
-              - name: "INIT_POSTGRES_HOST"
-                value: immich-rw.immich.svc.cluster.local
-
-              - name: "INIT_POSTGRES_USER"
-                valueFrom:
-                  secretKeyRef:
-                    name: "immich-app"
-                    key: "username"
-
-              - name: "INIT_POSTGRES_PASS"
-                valueFrom:
-                  secretKeyRef:
-                    name: "immich-app"
-                    key: "password"
-
-              - name: "INIT_POSTGRES_USER_FLAGS"
-                value: "-s"
-
-              - name: "INIT_POSTGRES_SUPER_USER"
-                valueFrom:
-                  secretKeyRef:
-                    name: "immich-superuser"
-                    key: "username"
-
-              - name: "INIT_POSTGRES_SUPER_PASS"
-                valueFrom:
-                  secretKeyRef:
-                    name: "immich-superuser"
-                    key: "password"
+        # initContainers:
+        #   init-db:
+        #     image:
+        #       repository: ghcr.io/home-operations/postgres-init
+        #       tag: 17.6@sha256:86a1992d46273c58fd4ad95b626081dfaabfe16bd56944675169e406d1a660dd
+        #       pullPolicy: IfNotPresent
+        #     env:
+        #       # NOTE: fill in env's
+        #
+        #       - name: "INIT_POSTGRES_DBNAME"
+        #         value: "app"
+        #
+        #       - name: "INIT_POSTGRES_HOST"
+        #         value: immich-rw.immich.svc.cluster.local
+        #
+        #       - name: "INIT_POSTGRES_USER"
+        #         valueFrom:
+        #           secretKeyRef:
+        #             name: "immich-app"
+        #             key: "username"
+        #
+        #       - name: "INIT_POSTGRES_PASS"
+        #         valueFrom:
+        #           secretKeyRef:
+        #             name: "immich-app"
+        #             key: "password"
+        #
+        #       - name: "INIT_POSTGRES_USER_FLAGS"
+        #         value: "-s"
+        #
+        #       - name: "INIT_POSTGRES_SUPER_USER"
+        #         valueFrom:
+        #           secretKeyRef:
+        #             name: "immich-superuser"
+        #             key: "username"
+        #
+        #       - name: "INIT_POSTGRES_SUPER_PASS"
+        #         valueFrom:
+        #           secretKeyRef:
+        #             name: "immich-superuser"
+        #             key: "password"
 
         containers:
           main:
