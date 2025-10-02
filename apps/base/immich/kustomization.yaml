@@ -6,3 +6,6 @@ resources:
   - oci-repo.yaml
   - namespace.yaml
   - database-cluster.yaml
+  - immich-config.yaml
+  - immich-release.yaml
+  - database-backup.yaml

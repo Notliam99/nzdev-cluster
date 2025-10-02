@@ -1,0 +1,214 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s-labs/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich
+spec:
+  interval: 1h
+  chartRef:
+    kind: OCIRepository
+    name: app-template
+  maxHistory: 3
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      server:
+        strategy: RollingUpdate
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 2000
+            runAsGroup: 2000
+            runAsNonRoot: true
+            fsGroup: 2000
+            fsGroupChangePolicy: OnRootMismatch
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: 17.6@sha256:86a1992d46273c58fd4ad95b626081dfaabfe16bd56944675169e406d1a660dd
+              pullPolicy: IfNotPresent
+            env:
+              # NOTE: fill in env's
+
+              - name: "INIT_POSTGRES_DBNAME"
+                value: "app"
+
+              - name: "INIT_POSTGRES_HOST"
+                value: immich-rw.immich.svc.cluster.local
+
+              - name: "INIT_POSTGRES_USER"
+                valueFrom:
+                  secretKeyRef:
+                    name: "immich-app"
+                    key: "username"
+
+              - name: "INIT_POSTGRES_PASS"
+                valueFrom:
+                  secretKeyRef:
+                    name: "immich-app"
+                    key: "password"
+
+              - name: "INIT_POSTGRES_USER_FLAGS"
+                value: "-s"
+
+              - name: "INIT_POSTGRES_SUPER_USER"
+                valueFrom:
+                  secretKeyRef:
+                    name: "immich-superuser"
+                    key: "username"
+
+              - name: "INIT_POSTGRES_SUPER_PASS"
+                valueFrom:
+                  secretKeyRef:
+                    name: "immich-superuser"
+                    key: "password"
+
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-server
+              tag: v1.142.0@sha256:29f12a20fd1975c9df06d99a65658cec40bf2357fb597499c32ee50a75f250ea
+            env:
+              # NOTE: fill in env's
+            - name: DB_DATABASE_NAME
+              value: app
+            - name: DB_HOSTNAME
+              value: immich-rw.immich.svc.cluster.local
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: immich-app
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: immich-app
+                  key: password
+            envFrom:
+            - configMapRef:
+              name: immich-configmap
+      machine-learning:
+        strategy: RollingUpdate
+        pod:
+          enableServiceLinks: false
+          securityContext:
+            runAsUser: 2000
+            runAsGroup: 2000
+            runAsNonRoot: true
+            fsGroup: 2000
+            fsGroupChangePolicy: OnRootMismatch
+        containers:
+          main:
+            image:
+              repository: ghcr.io/immich-app/immich-machine-learning
+              tag: v1.142.0@sha256:5e9cc6b9717e34f3cdc591aa860d6d29c990405ef87ad057ef95f73096ae6f29
+            envFrom:
+              - secretRef:
+                  name: immich-secret
+              - configMapRef:
+                  name: immich-configmap
+            env:
+            - name: DB_DATABASE_NAME
+              value: app
+            - name: DB_HOSTNAME
+              value: immich-rw.immich.svc.cluster.local
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: immich-app
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: immich-app
+                  key: password
+            - name: MPLCONFIGDIR
+              value: "/cache/matplotlib"
+      redis:
+        containers:
+          main:
+            image:
+              repository: public.ecr.aws/docker/library/redis
+              tag: 8.2.1@sha256:acb90ced0bd769b7c04cb4c32c4494ba7b3e0ee068bdbfff0eeb0d31c2a21078
+            env:
+              REDIS_REPLICATION_MODE: master
+            command: ["redis-server"]
+
+    service:
+      server:
+        controller: server
+        ports:
+          http:
+            port: 3001
+      machine-learning:
+        controller: machine-learning
+        ports:
+          http:
+            port: 3003
+      redis:
+        controller: redis
+        ports:
+          http:
+            port: 6379
+
+    ingress:
+      immich-ingress:
+        enabled: true
+        annotations:
+          traefik.ingress.kubernetes.io/router.entrypoints: websecure
+        hosts:
+          host: immich.nzdev.org
+          paths:
+            - path: /
+              service:
+                name: server
+                port: 3001
+
+
+    persistence:
+      # DONE: change these parameters to fit...
+      matplotlib:
+        type: emptyDir
+        advancedMounts:
+          server:
+            main:
+              - path: /config/matplotlib
+      library:
+        storageClass: nfsclient
+        size: 100Gi
+        accessMode: ReadWriteMany
+        advancedMounts:
+          server:
+            main:
+              - path: /usr/src/app/upload
+      machine-learning-cache:
+        storageClass: nfsclient
+        size: 10Gi
+        accessMode: ReadWriteMany
+        advancedMounts:
+          machine-learning:
+            main:
+              - path: /cache
+                subPath: cache
+              - path: /.cache
+                subPath: dotCache
+      tmpfs:
+        type: emptyDir
+        advancedMounts:
+          server:
+            main:
+              - path: /usr/src/app/.reverse-geocoding-dump
+                subPath: geocoding
+              - path: /usr/src/app/.transformers_cache
+                subPath: transformers
