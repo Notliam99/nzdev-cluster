@@ -47,7 +47,4 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
       env:
-        - name: GF_SECURITY_ALLOW_EMBEDDING
-          value: true
-        - name: GF_SERVER_URL
-          value: https://graf.nzdev.org
+        GF_SERVER_URL: https://graf.nzdev.org
