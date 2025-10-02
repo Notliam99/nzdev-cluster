@@ -76,5 +76,6 @@ spec:
         enabled: true
         storageClass: nfsclient
         size: 20Gi
+        accessMode: ReadWriteMany
         globalMounts:
           - path: /backups

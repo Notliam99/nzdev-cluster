@@ -80,25 +80,25 @@ spec:
             image:
               repository: ghcr.io/immich-app/immich-server
               tag: v1.142.0@sha256:29f12a20fd1975c9df06d99a65658cec40bf2357fb597499c32ee50a75f250ea
+            envFrom:
+              - configMapRef:
+                  name: immich-configmap
             env:
               # NOTE: fill in env's
-            - name: DB_DATABASE_NAME
-              value: app
-            - name: DB_HOSTNAME
-              value: immich-rw.immich.svc.cluster.local
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: immich-app
-                  key: username
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: immich-app
-                  key: password
-            envFrom:
-            - configMapRef:
-              name: immich-configmap
+              - name: DB_DATABASE_NAME
+                value: app
+              - name: DB_HOSTNAME
+                value: immich-rw.immich.svc.cluster.local
+              - name: DB_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-app
+                    key: username
+              - name: DB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-app
+                    key: password
       machine-learning:
         strategy: RollingUpdate
         pod:
@@ -115,27 +115,25 @@ spec:
               repository: ghcr.io/immich-app/immich-machine-learning
               tag: v1.142.0@sha256:5e9cc6b9717e34f3cdc591aa860d6d29c990405ef87ad057ef95f73096ae6f29
             envFrom:
-              - secretRef:
-                  name: immich-secret
               - configMapRef:
                   name: immich-configmap
             env:
-            - name: DB_DATABASE_NAME
-              value: app
-            - name: DB_HOSTNAME
-              value: immich-rw.immich.svc.cluster.local
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: immich-app
-                  key: username
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: immich-app
-                  key: password
-            - name: MPLCONFIGDIR
-              value: "/cache/matplotlib"
+              - name: DB_DATABASE_NAME
+                value: app
+              - name: DB_HOSTNAME
+                value: immich-rw.immich.svc.cluster.local
+              - name: DB_USERNAME
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-app
+                    key: username
+              - name: DB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-app
+                    key: password
+              - name: MPLCONFIGDIR
+                value: "/cache/matplotlib"
       redis:
         containers:
           main:
@@ -169,13 +167,12 @@ spec:
         annotations:
           traefik.ingress.kubernetes.io/router.entrypoints: websecure
         hosts:
-          host: immich.nzdev.org
-          paths:
-            - path: /
-              service:
-                name: server
-                port: 3001
-
+          - host: immich.nzdev.org
+            paths:
+              - path: /
+                service:
+                  name: server
+                  port: 3001
 
     persistence:
       # DONE: change these parameters to fit...
