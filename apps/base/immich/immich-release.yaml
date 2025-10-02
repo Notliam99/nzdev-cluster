@@ -173,7 +173,7 @@ spec:
             paths:
               - path: /
                 service:
-                  name: server
+                  name: immich-server
                   port: 2283
 
     persistence:
