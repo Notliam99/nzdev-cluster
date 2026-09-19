@@ -79,7 +79,7 @@ spec:
           main:
             image:
               repository: ghcr.io/immich-app/immich-server
-              tag: v2.0.1@sha256:8286638680f0a38a7cb380be64ed77d1d1cfe6d0e0b843f64bff92b24289078d
+              tag: v3.2.2@sha256:79cc1623323d5894922686d8743b4780181428f98eecbfb58ce12c41ef02d1ea
             envFrom:
               - configMapRef:
                   name: immich-configmap
@@ -115,7 +115,7 @@ spec:
           main:
             image:
               repository: ghcr.io/immich-app/immich-machine-learning
-              tag: v2.0.1
+              tag: v3.2.2
             envFrom:
               - configMapRef:
                   name: immich-configmap
